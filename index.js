@@ -37,11 +37,12 @@ app.use('/announcements', announcementsRoute);
 
 /* MONGOOSE SETUP */
 const uri = process.env.MONGO_URL;
+
 let mongooseConnection;
 
 async function connectToDatabase() {
   if (!mongooseConnection) {
-    mongooseConnection = mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongooseConnection = mongoose.connect(uri);
     await mongooseConnection;
   }
 }
