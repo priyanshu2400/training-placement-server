@@ -47,7 +47,11 @@ async function connectToDatabase() {
   }
 }
 
-module.exports = async (req, res) => {
-  await connectToDatabase();
-  app(req, res);
-};
+/* MONGOOSE SETUP */
+const uri = process.env.MONGO_URL;
+mongoose
+  .connect(uri)
+  .then(() => {
+    app.listen(port, () => console.log(`Server Port: ${port}`));
+  })
+  .catch((error) => console.log(`${error} did not connect`));
